@@ -1,0 +1,18 @@
+{
+    "opera.exe": "Opera",
+    "Code.exe": "VS Code",
+    "Telegram.exe": "Telegram",
+    "Discord.exe": "Discord",
+    "steam.exe": "Steam",
+    "steamwebhelper.exe": "Steam Web Helper",
+    "explorer.exe": "Проводник",
+    "WINWORD.EXE": "Word",
+    "WindowsTerminal.exe": "Terminal",
+    "SearchHost.exe": "Поиск Windows",
+    "DB Browser for SQLite.exe": "DB Browser for SQLite",
+    "AdGuardVpn.exe": "AdGuard VPN",
+    "Notepad.exe": "Notepad*",
+    "NVIDIA App.exe": "NVIDIA App*",
+    "wallpaper64.exe": "wallpaper*",
+    "ui32.exe": "ui*"
+}

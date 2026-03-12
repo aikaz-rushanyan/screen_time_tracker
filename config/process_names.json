@@ -14,5 +14,7 @@
     "Notepad.exe": "Notepad*",
     "NVIDIA App.exe": "NVIDIA App*",
     "wallpaper64.exe": "wallpaper*",
-    "ui32.exe": "ui*"
+    "ui32.exe": "ui*",
+    "REDlauncher.exe": "REDlauncher*",
+    "witcher3.exe": "witcher*"
 }

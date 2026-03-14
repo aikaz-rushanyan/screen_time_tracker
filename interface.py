@@ -8,25 +8,32 @@ from PIL import Image
 import threading
 from charts import create_charts
 
-ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("blue")
-
 app = ctk.CTk()
 app.title("Аналитика экранного времени")
 app.geometry("500x500")
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("blue")
 
 conn = sqlite3.connect('data/screen_time.db')
 df = pd.read_sql('SELECT * FROM screen_time_log', conn)
 conn.close()
 
+def on_close():
+    
+    # Отменяем все отложенные задачи через after_info()
+    for task_id in app.after_info():
+        try:
+            app.after_cancel(task_id)
+        except:
+            pass
+    
+    app.destroy()
+
+
 fig = create_charts(df)
 
-# canvas_frame = ctk.CTkFrame(app)
-# canvas_frame.pack()
-# ROW = ctk.CTkFrame(canvas_frame)
-# canvas = FigureCanvasTkAgg(fig, master=app)
-# canvas.draw()
+top_frame = ctk.CTkFrame(app, 100, 100)
+top_frame.pack(side='bottom')
 
-# f = canvas.get_tk_widget()
-# ctk.CTkButton(ROW, 140, 28, text='button', command=f.pack)
+app.protocol('WM_DELETE_WINDOW', on_close)
 app.mainloop()

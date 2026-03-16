@@ -10,7 +10,7 @@ from charts import create_charts
 
 app = ctk.CTk()
 app.title("Аналитика экранного времени")
-app.geometry("500x500")
+app.geometry("1000x700")
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
@@ -27,13 +27,33 @@ def on_close():
         except:
             pass
     
-    app.destroy()
+    app.quit()
 
 
-fig = create_charts(df)
+fig = create_charts(df, size=(10,5))
+top_apps = df.groupby('process_name_usable')['duration_seconds'].agg(['sum']).sort_values(by='sum', ascending=False)[-5:] / 60 / 60
+top_apps_dict = top_apps.to_dict()['sum']
+#Фрейм для топ приложений
+top_frame = ctk.CTkFrame(app, 300, 300)
+top_frame.place(x=0, y=0)
+top_frame_title = ctk.CTkLabel(top_frame, text='Топ приложений', font=("Arial", 20, "bold"))
+top_frame_title.pack(pady=10, padx=20)
+c = 1
+for i in top_apps_dict:
+    # Название и время
+    label = ctk.CTkLabel(
+        top_frame,
+        text=f"{c}. {i} - {round(top_apps_dict[i], 3)} ч.",
+        font=("Arial", 17),
+        anchor="w"
+    )
+    label.pack(pady=2, padx=10, fill="x")
+    c += 1
+# canvas = FigureCanvasTkAgg(fig, top_frame)
+# canvas.draw()
 
-top_frame = ctk.CTkFrame(app, 100, 100)
-top_frame.pack(side='bottom')
+# canvas_widget = canvas.get_tk_widget()
+# canvas_widget.pack(fill=ctk.BOTH, expand=True)
 
 app.protocol('WM_DELETE_WINDOW', on_close)
 app.mainloop()

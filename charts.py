@@ -51,7 +51,7 @@ def create_barh(data, size=(10, 5), quality=200):
     return fig
 
 def create_pie(data, size=(10, 5), quality=200):
-    fig, ax = plt.subplots(figsize=size, dpi=quality)
+    fig, ax = plt.subplots(figsize=size, dpi=quality,constrained_layout=True)
 
     colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#ff99cc', '#c499ff']
 

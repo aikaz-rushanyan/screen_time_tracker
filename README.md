@@ -69,11 +69,6 @@ python interface.py
 streamlit run dashboard.py
 ```
 
-**Быстрая проверка (консоль):**
-```bash
-python test.py
-```
-
 ## 📊 Как это работает
 
 1. `main.py` опрашивает активное окно каждую секунду через Windows API

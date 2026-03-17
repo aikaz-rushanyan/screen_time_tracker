@@ -1,3 +1,4 @@
+import os
 import time
 import psutil
 import win32gui
@@ -5,6 +6,8 @@ import win32process
 import sqlite3
 from datetime import datetime
 import json
+
+os.makedirs('data', exist_ok=True)
 
 with open('config/process_names.json', 'r', encoding='utf-8') as file:
     names = json.load(file)

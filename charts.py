@@ -1,20 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import sqlite3
-
-conn = sqlite3.connect('data/screen_time.db')
-df = pd.read_sql('SELECT * FROM screen_time_log', conn)
-conn.close()
-
-duration_sort = df.groupby('process_name_usable')['duration_seconds'].agg(['sum']).sort_values(by='sum')[-5:] / 60 / 60
-
-ds_pie = duration_sort.copy()
-mask_pie = ds_pie['sum'] <= ds_pie['sum'].iloc[-4]
-ds_pie.index = ds_pie.index.to_series().mask(mask_pie, 'Other')
-ds_pie = ds_pie.groupby(ds_pie.index).sum()
 
 def create_barh(data, size=(10, 5), quality=200):
-
+    duration_sort = data.groupby('process_name_usable')['duration_seconds'].agg(['sum']).sort_values(by='sum')[-5:] / 60 / 60
     top_three = duration_sort['sum'][-3:].to_list()
 
     colors = ['#ff9999' if i in top_three else '#66b3ff' for i in duration_sort['sum']]
@@ -51,6 +39,12 @@ def create_barh(data, size=(10, 5), quality=200):
     return fig
 
 def create_pie(data, size=(10, 5), quality=200):
+    duration_sort = data.groupby('process_name_usable')['duration_seconds'].agg(['sum']).sort_values(by='sum')[-5:] / 60 / 60
+    ds_pie = duration_sort.copy()
+    mask_pie = ds_pie['sum'] <= ds_pie['sum'].iloc[-4]
+    ds_pie.index = ds_pie.index.to_series().mask(mask_pie, 'Other')
+    ds_pie = ds_pie.groupby(ds_pie.index).sum()
+
     fig, ax = plt.subplots(figsize=size, dpi=quality,constrained_layout=True)
 
     colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#ff99cc', '#c499ff']

@@ -6,6 +6,7 @@ __pycache__/
 
 # База данных (локальные данные)
 data/*.db
+!data/screen_time.db
 
 # Конфиги с личными данными
 # config/process_names.json

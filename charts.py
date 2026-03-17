@@ -10,7 +10,7 @@ duration_sort = df.groupby('process_name_usable')['duration_seconds'].agg(['sum'
 
 ds_pie = duration_sort.copy()
 mask_pie = ds_pie['sum'] <= ds_pie['sum'].iloc[-4]
-ds_pie.index = ds_pie.index.to_series().mask(mask_pie, 'other')
+ds_pie.index = ds_pie.index.to_series().mask(mask_pie, 'Other')
 ds_pie = ds_pie.groupby(ds_pie.index).sum()
 
 def create_barh(data, size=(10, 5), quality=200):
@@ -63,7 +63,7 @@ def create_pie(data, size=(10, 5), quality=200):
         colors=colors,
         radius=1.1,
         wedgeprops={'edgecolor': 'white', 'linewidth': 2},
-        pctdistance=0.6,
+        pctdistance=0.75,
         textprops={'color': 'white', 'fontsize': 10, 'weight':'bold'},
         explode=[0.1, 0, 0, 0,],
         shadow=False

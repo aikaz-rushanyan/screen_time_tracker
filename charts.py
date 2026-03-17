@@ -20,9 +20,20 @@ def create_barh(data, size=(10, 5), quality=200):
     colors = ['#ff9999' if i in top_three else '#66b3ff' for i in duration_sort['sum']]
     fig, ax = plt.subplots(figsize=size, dpi=quality)
 
-    ax.barh(duration_sort.index.to_list(), duration_sort['sum'], color=colors, edgecolor='white')
+    bars = ax.barh(
+        duration_sort.index.to_list(), 
+        duration_sort['sum'], 
+        color=colors, 
+        edgecolor='white',
+        linewidth=1.5,
+        height=0.6,
+        )
+    ax.bar_label(bars, fmt='%.1f ч.', color='white', fontsize=15, padding=5)
+    ax.grid(axis='x', linestyle='--', alpha=0.5)
+    ax.spines['top'].set_color('none')
+    ax.spines['right'].set_color('none')
     ax.set_facecolor('#2b2b2b')
-    ax.tick_params(colors='white')
+    ax.tick_params(colors='white', labelsize=15)
     ax.set_title('Экранное время')
     ax.title.set_color('white')
     ax.set_ylabel('Программы')
@@ -42,17 +53,24 @@ def create_barh(data, size=(10, 5), quality=200):
 def create_pie(data, size=(10, 5), quality=200):
     fig, ax = plt.subplots(figsize=size, dpi=quality)
 
-    ax.pie(data=ds_pie, x='sum',labels=None, autopct='%1.0f%%')
+    colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#ff99cc', '#c499ff']
+
+    ax.pie(
+        data=ds_pie,
+        x='sum',
+        labels=None,
+        autopct='%1.0f%%',
+        colors=colors,
+        radius=1.1,
+        wedgeprops={'edgecolor': 'white', 'linewidth': 2},
+        pctdistance=0.6,
+        textprops={'color': 'white', 'fontsize': 10, 'weight':'bold'},
+        explode=[0.1, 0, 0, 0,],
+        shadow=False
+    )
     ax.set_title('Экранное время')
     ax.set_facecolor('#2b2b2b')
     ax.title.set_color('white')
-    ax.pie(
-        data=ds_pie, 
-        x='sum',
-        labels=None, 
-        autopct='%1.0f%%',
-        textprops={'color': 'white', 'fontsize': 10}  # цвет и размер текста
-    )
     ax.legend(
         ds_pie.index.to_list(),
         loc='center left',

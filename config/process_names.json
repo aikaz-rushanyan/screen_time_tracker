@@ -22,5 +22,10 @@
     "LockApp.exe": "LockApp*",
     "AmneziaVPN.exe": "AmneziaVPN",
     "OpenWith.exe": "OpenWith*",
-    "vlc.exe": "VLC Media"
+    "vlc.exe": "VLC Media",
+    "pgAdmin4.exe": "pgAdmin4",
+    "vstudio_x64_17_win.tmp": "vstudio x  win*",
+    "msiexec.exe": "msiexec*",
+    "vstudio.exe": "vstudio*",
+    "dwm.exe": "dwm*"
 }

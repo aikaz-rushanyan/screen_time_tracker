@@ -43,7 +43,7 @@ def create_pie(data, size=(10, 5), quality=200):
     ds_pie = duration_sort.copy()
     mask_pie = ds_pie['sum'] <= ds_pie['sum'].iloc[-4]
     ds_pie.index = ds_pie.index.to_series().mask(mask_pie, 'Other')
-    ds_pie = ds_pie.groupby(ds_pie.index).sum()
+    ds_pie = ds_pie.groupby(ds_pie.index).sum().sort_values(by='sum', ascending=False)
 
     fig, ax = plt.subplots(figsize=size, dpi=quality,constrained_layout=True)
 
